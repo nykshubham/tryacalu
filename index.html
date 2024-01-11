@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;,">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website Carbon Emission Calculator</title>
 </head>
@@ -19,8 +18,8 @@
         function calculateCarbon() {
             const url = document.getElementById('urlInput').value;
 
-            // Make the API request using PHP as a proxy
-            fetch(`proxy.php?url=${encodeURIComponent(url)}`)
+            // Make the API request using the Netlify serverless function
+            fetch(`/.netlify/functions/netlify-function?url=${encodeURIComponent(url)}`)
                 .then(response => response.json())
                 .then(data => {
                     // Display the result
@@ -38,3 +37,6 @@
                     resultDiv.innerHTML = 'Error fetching Website Carbon data.';
                 });
         }
+    </script>
+</body>
+</html>
