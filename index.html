@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Carbon API Example</title>
+    <title>Website Carbon Emission Calculator</title>
 </head>
 <body>
     <h1>Website Carbon Emission Calculator</h1>
@@ -16,11 +16,10 @@
 
     <script>
         function calculateCarbon() {
-            // Get the URL from the input field
             const url = document.getElementById('urlInput').value;
 
-            // Make the API request
-            fetch(`https://api.websitecarbon.com/site?url=${encodeURIComponent(url)}`)
+            // Make the API request using PHP as a proxy
+            fetch(`proxy.php?url=${encodeURIComponent(url)}`)
                 .then(response => response.json())
                 .then(data => {
                     // Display the result
@@ -38,6 +37,3 @@
                     resultDiv.innerHTML = 'Error fetching Website Carbon data.';
                 });
         }
-    </script>
-</body>
-</html>
