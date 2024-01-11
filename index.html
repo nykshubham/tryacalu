@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Carbon API Example</title>
+</head>
+<body>
+    <h1>Website Carbon Emission Calculator</h1>
+    
+    <label for="urlInput">Enter URL:</label>
+    <input type="text" id="urlInput" placeholder="https://www.example.com">
+    <button onclick="calculateCarbon()">Calculate</button>
+
+    <div id="result"></div>
+
+    <script>
+        function calculateCarbon() {
+            // Get the URL from the input field
+            const url = document.getElementById('urlInput').value;
+
+            // Make the API request
+            fetch(`https://api.websitecarbon.com/site?url=${encodeURIComponent(url)}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Display the result
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = `
+                        <p>URL: ${data.url}</p>
+                        <p>Green Hosting: ${data.green ? 'Yes' : 'No'}</p>
+                        <p>Bytes Transferred: ${data.bytes}</p>
+                        <p>Cleaner Than: ${data.cleanerThan}</p>
+                    `;
+                })
+                .catch(error => {
+                    console.error('Error fetching Website Carbon data:', error);
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = 'Error fetching Website Carbon data.';
+                });
+        }
+    </script>
+</body>
+</html>
